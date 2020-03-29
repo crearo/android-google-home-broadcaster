@@ -8,16 +8,26 @@ import android.provider.Settings
 import android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
 import android.text.TextUtils
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 
 private const val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var googleHomeViewModel: GoogleHomeViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val tvResponse: TextView = findViewById(R.id.tv_response)
+        googleHomeViewModel = ViewModelProvider(this).get(GoogleHomeViewModel::class.java)
+        googleHomeViewModel.responseLiveData.observe(this, Observer {
+            tvResponse.text = it.toString()
+        })
     }
 
     override fun onResume() {
@@ -66,5 +76,9 @@ class MainActivity : AppCompatActivity() {
 
     fun launchNotificationSettings(unused: View) {
         startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS))
+    }
+
+    fun dummyBroadcast(unused: View) {
+        googleHomeViewModel.broadcast(BroadcastRequest("Hey Rish", true, "rish"))
     }
 }

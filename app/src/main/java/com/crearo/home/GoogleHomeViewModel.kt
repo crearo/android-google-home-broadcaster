@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class GoogleHomeModeView : ViewModel() {
+class GoogleHomeViewModel : ViewModel() {
     val client = GoogleHomeApiClient.client
 
     private val parentJob = Job()
