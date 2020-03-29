@@ -1,4 +1,4 @@
-package com.crearo.home
+package com.crearo.home.notifications
 
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification

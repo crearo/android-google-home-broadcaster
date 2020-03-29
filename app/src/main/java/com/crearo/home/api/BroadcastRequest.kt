@@ -1,4 +1,4 @@
-package com.crearo.home
+package com.crearo.home.api
 
 import com.squareup.moshi.Json
 

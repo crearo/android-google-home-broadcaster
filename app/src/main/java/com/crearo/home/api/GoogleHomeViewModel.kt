@@ -1,7 +1,10 @@
-package com.crearo.home
+package com.crearo.home.api
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.crearo.home.api.BroadcastRequest
+import com.crearo.home.api.BroadcastResponse
+import com.crearo.home.api.GoogleHomeApiClient
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

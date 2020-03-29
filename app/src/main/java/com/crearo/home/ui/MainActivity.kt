@@ -1,4 +1,4 @@
-package com.crearo.home
+package com.crearo.home.ui
 
 import android.app.AlertDialog
 import android.content.ComponentName
@@ -12,6 +12,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.crearo.home.R
+import com.crearo.home.api.BroadcastRequest
+import com.crearo.home.api.GoogleHomeViewModel
+import com.crearo.home.notifications.NotificationService
 
 
 private const val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
@@ -79,6 +83,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun dummyBroadcast(unused: View) {
-        googleHomeViewModel.broadcast(BroadcastRequest("Hey Rish", true, "rish"))
+        googleHomeViewModel.broadcast(
+            BroadcastRequest(
+                "Hey Rish",
+                true,
+                "rish"
+            )
+        )
     }
 }

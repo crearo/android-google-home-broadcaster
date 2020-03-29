@@ -1,6 +1,7 @@
-package com.crearo.home
+package com.crearo.home.api
 
-import retrofit2.Call
+import com.crearo.home.api.BroadcastRequest
+import com.crearo.home.api.BroadcastResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
