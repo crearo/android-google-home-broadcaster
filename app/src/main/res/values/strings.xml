@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Homeware</string>
+    <string name="notification_listener_service">Enable Service</string>
+    <string name="notification_listener_service_explanation">Enable it yo</string>
 </resources>
