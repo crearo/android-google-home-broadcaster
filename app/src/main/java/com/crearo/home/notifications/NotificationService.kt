@@ -3,6 +3,7 @@ package com.crearo.home.notifications
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import androidx.lifecycle.Observer
+import com.crearo.home.Config
 import com.crearo.home.api.BroadcastRequest
 import com.crearo.home.api.BroadcastResponse
 import com.crearo.home.api.GoogleHomeViewModel
@@ -30,19 +31,14 @@ class NotificationService : NotificationListenerService() {
             return
         }
         val packageName = sbn.packageName
-        val tickerText = sbn.notification.tickerText
+        val tickerText = sbn.notification.tickerText.toString()
         val bundle = sbn.notification.extras
-        val title = bundle.getString("android.title")
-        val text = bundle.getString("android.text") ?: ""
+        val title = bundle.getString("android.title", "")
+        val text = bundle.getString("android.text", "")
 
-        if (packageName in arrayOf(
-                "com.google.android.calendar",
-                "com.whatsapp",
-                "com.wagner.valentin.notificationmaker2"
-            )
-        ) {
+        if (packageName in Config.PACKAGES_OF_INTEREST) {
             Timber.d("ticker: $tickerText\ntitle:$title\ntext:$text")
-            googleHomeViewModel.broadcast(BroadcastRequest(text, true, "rish"))
+            googleHomeViewModel.broadcast(BroadcastRequest(tickerText, true, "rish"))
         }
     }
 
