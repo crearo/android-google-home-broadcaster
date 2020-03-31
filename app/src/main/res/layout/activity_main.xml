@@ -30,4 +30,13 @@
         android:padding="8dp"
         android:text="The response will show here" />
 
+    <TextView
+        android:id="@+id/tv_notif_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:text="Notification Log" />
+
 </LinearLayout>

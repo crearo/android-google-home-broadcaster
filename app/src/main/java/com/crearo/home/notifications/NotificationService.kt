@@ -9,8 +9,14 @@ import com.crearo.home.api.BroadcastResponse
 import com.crearo.home.api.GoogleHomeViewModel
 import timber.log.Timber
 
+/**
+ * Avoid changing the name of this class in production.
+ * Apparently Android has a bug that it caches the classname and doesn't clear the list even on reboot
+ * https://stackoverflow.com/a/40825389/6844926
+ **/
 class NotificationService : NotificationListenerService() {
 
+    private lateinit var notificationLog: NotificationLog
     private val googleHomeViewModel = GoogleHomeViewModel()
     private val observer = Observer<BroadcastResponse> {
         Timber.d("Broadcast message with response: $it")
@@ -18,6 +24,7 @@ class NotificationService : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
+        notificationLog = NotificationLog(this)
         googleHomeViewModel.responseLiveData.observeForever(observer)
     }
 
@@ -27,18 +34,25 @@ class NotificationService : NotificationListenerService() {
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
-        if (sbn == null) {
+        if (sbn == null || sbn.notification == null) {
             return
         }
         val packageName = sbn.packageName
-        val tickerText = sbn.notification.tickerText.toString()
+        val tickerText = sbn.notification.tickerText
         val bundle = sbn.notification.extras
         val title = bundle.getString("android.title", "")
         val text = bundle.getString("android.text", "")
 
         if (packageName in Config.PACKAGES_OF_INTEREST) {
             Timber.d("ticker: $tickerText\ntitle:$title\ntext:$text")
-            googleHomeViewModel.broadcast(BroadcastRequest(tickerText, true, "rish"))
+            notificationLog.addLog((tickerText ?: "") as String)
+            googleHomeViewModel.broadcast(
+                BroadcastRequest(
+                    (tickerText ?: "") as String,
+                    true,
+                    "rish"
+                )
+            )
         }
     }
 

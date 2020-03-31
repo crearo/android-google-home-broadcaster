@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
 import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.crearo.home.R
 import com.crearo.home.api.BroadcastRequest
 import com.crearo.home.api.GoogleHomeViewModel
+import com.crearo.home.notifications.NotificationLog
 import com.crearo.home.notifications.NotificationService
 
 
@@ -39,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         if (!isNotificationServiceEnabled()) {
             showNotificationServiceAlertDialog()
         }
+        val tvNotifLog: TextView = findViewById(R.id.tv_notif_log)
+        tvNotifLog.text = NotificationLog(this).getLog().joinToString("\n")
+        tvNotifLog.setMovementMethod(ScrollingMovementMethod())
     }
 
     /**
@@ -55,11 +60,9 @@ class MainActivity : AppCompatActivity() {
         if (!TextUtils.isEmpty(flat)) {
             val names = flat.split(":").toTypedArray()
             for (i in names.indices) {
-                val cn = ComponentName.unflattenFromString(names[i])
-                if (cn != null) {
-                    if (TextUtils.equals(pkgName, cn.packageName) &&
-                        cn.shortClassName.substring(1) == NotificationService::class.java.simpleName
-                    ) {
+                val componentName = ComponentName.unflattenFromString(names[i]) ?: continue
+                if (TextUtils.equals(pkgName, componentName.packageName)) {
+                    if (componentName.shortClassName.substring(1) == NotificationService::class.java.simpleName) {
                         return true
                     }
                 }
