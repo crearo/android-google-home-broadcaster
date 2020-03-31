@@ -17,7 +17,7 @@ object AppSpecificNotificationHandler {
         Timber.d("ticker: $tickerText\ntitle:$title\ntext:$text")
 
         return when (packageName) {
-            "com.google.android.apps.dynamite" -> "${title.removePrefix("Chat:")} sent $text"
+            "com.google.android.apps.dynamite" -> "${title.removePrefix("Chat: ")} sent $text"
             "com.google.android.calendar" -> tickerText
             else -> tickerText
         }

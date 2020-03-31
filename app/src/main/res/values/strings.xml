@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Homeware</string>
-    <string name="notification_listener_service">Enable Service</string>
-    <string name="notification_listener_service_explanation">Enable it yo</string>
+    <string name="notification_listener_service">Enable Notification Listener</string>
+    <string name="notification_listener_service_explanation">Switch on the toggle next to the app called Homeware in the next page. This allows the app to read received notifications and broadcast them to Google Home.</string>
     <string name="open_notification_settings">Open Notification Settings</string>
+    <string name="google_home_s_response_will_show_here">Google home\'s response will show here</string>
+    <string name="broadcast">Broadcast</string>
+    <string name="broadcast_something">Broadcast something</string>
+    <string name="notification_log">Notification Log</string>
+    <string name="hey">Hey!</string>
 </resources>

@@ -8,7 +8,10 @@ import android.provider.Settings
 import android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -18,7 +21,6 @@ import com.crearo.home.api.BroadcastRequest
 import com.crearo.home.api.GoogleHomeViewModel
 import com.crearo.home.notifications.NotificationLog
 import com.crearo.home.notifications.NotificationService
-
 
 private const val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
 
@@ -43,7 +45,19 @@ class MainActivity : AppCompatActivity() {
         }
         val tvNotifLog: TextView = findViewById(R.id.tv_notif_log)
         tvNotifLog.text = NotificationLog(this).getLog().joinToString("\n")
-        tvNotifLog.setMovementMethod(ScrollingMovementMethod())
+        tvNotifLog.movementMethod = ScrollingMovementMethod()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_open_notification_settings -> launchNotificationSettings()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
@@ -81,16 +95,17 @@ class MainActivity : AppCompatActivity() {
         dialog.create().show()
     }
 
-    fun launchNotificationSettings(unused: View) {
+    private fun launchNotificationSettings() {
         startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS))
     }
 
     fun dummyBroadcast(unused: View) {
+        val et: EditText = findViewById(R.id.et)
+        findViewById<TextView>(R.id.tv_response).text = ""
         googleHomeViewModel.broadcast(
             BroadcastRequest(
-                "Hey Rish",
-                true,
-                "rish"
+                if (et.text.isEmpty()) getString(R.string.hey) else et.text.toString(),
+                true
             )
         )
     }

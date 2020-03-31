@@ -39,7 +39,7 @@ class NotificationService : NotificationListenerService() {
 
         val speechText = AppSpecificNotificationHandler.handle(sbn)
         notificationLog.addLog(speechText)
-        googleHomeViewModel.broadcast(BroadcastRequest(speechText, true, "rish"))
+        googleHomeViewModel.broadcast(BroadcastRequest(speechText, true))
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
