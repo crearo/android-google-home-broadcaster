@@ -34,26 +34,12 @@ class NotificationService : NotificationListenerService() {
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
-        if (sbn == null || sbn.notification == null) {
-            return
-        }
-        val packageName = sbn.packageName
-        val tickerText = sbn.notification.tickerText
-        val bundle = sbn.notification.extras
-        val title = bundle.getString("android.title", "")
-        val text = bundle.getString("android.text", "")
+        if (sbn == null || sbn.notification == null) return
+        if (sbn.packageName !in Config.PACKAGES_OF_INTEREST) return
 
-        if (packageName in Config.PACKAGES_OF_INTEREST) {
-            Timber.d("ticker: $tickerText\ntitle:$title\ntext:$text")
-            notificationLog.addLog((tickerText ?: "") as String)
-            googleHomeViewModel.broadcast(
-                BroadcastRequest(
-                    (tickerText ?: "") as String,
-                    true,
-                    "rish"
-                )
-            )
-        }
+        val speechText = AppSpecificNotificationHandler.handle(sbn)
+        notificationLog.addLog(speechText)
+        googleHomeViewModel.broadcast(BroadcastRequest(speechText, true, "rish"))
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {

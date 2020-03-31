@@ -13,7 +13,7 @@ class NotificationLog(context: Context) {
     }
 
     fun addLog(ticker: String) {
-        val list = getLog().toMutableList().apply { add(ticker) }
+        val list = getLog().toMutableList().apply { add(0, ticker) }
         sharedPrefs.edit().putString(KEY_NOTIF_LOG, list.joinToString(DELIMITER)).apply()
     }
 
