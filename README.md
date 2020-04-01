@@ -1,12 +1,15 @@
 # Android -> Google Home Notification Broadcaster
 
 ##### My use case is simple:
-I've been working from home for the past 3 weeks now, and I often miss meetings and important messages from my boss that require immediate attention because I'm not always at my desk (of course, we're all "working" from home aren't we :)). 
+I've been working from home for the past 3 weeks now, and I often miss meetings and important messages that require immediate attention because I'm not always at my desk (of course, we're all "working" from home aren't we :)). Jokes aside, it is a little hard if your work requires collab.
 
 ##### And my solution is fairly straightforward
 I have 3 Google Homes, one in each room and one in my bathroom.
 This is a simple app that reads notifications from my phone and broadcasts them to Google Home. 
 It really pissed me off when I saw Google Home doesn't have an open local API to access it. 
+
+##### Enough talk, show me the video
+[![YouTube Video](https://img.youtube.com/vi/B97N_3moiF0/0.jpg)](https://www.youtube.com/watch?v=B97N_3moiF0)
 
 ##### I want this!
 
