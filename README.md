@@ -9,7 +9,7 @@ This is a simple app that reads notifications from my phone and broadcasts them 
 It really pissed me off when I saw Google Home doesn't have an open local API to access it. 
 
 ##### Enough talk, show me the video
-[![YouTube Video](https://img.youtube.com/vi/B97N_3moiF0/0.jpg)](https://www.youtube.com/watch?v=B97N_3moiF0)
+[![YouTube Video](https://img.youtube.com/vi/5djT0X8O2kw/0.jpg)](https://www.youtube.com/watch?v=5djT0X8O2kw)
 
 ##### I want this!
 
